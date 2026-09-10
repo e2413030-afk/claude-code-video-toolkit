@@ -6,6 +6,7 @@
 #   uv sync --extra whisper      # + openai-whisper for burned karaoke captions (heavy, pulls in torch)
 #   uv sync --extra modal        # + Modal CLI for self-hosted cloud GPU fallback
 #   uv sync --extra youtube      # + Google API client for tools/youtube_upload.py / /publish
+#   uv sync --extra editing      # + budoux (JP line-break) and auto-editor (VAD jump-cut)
 #   uv sync --all-extras         # everything
 #
 # Then run any tool through the project environment:
@@ -43,6 +44,16 @@ dependencies = [
 # (word-level timing; heavy install, pulls in torch)
 whisper = [
     "openai-whisper>=20231117",
+]
+# Editing helpers discovered via skill-discovery audit (2026-09-10):
+# - budoux: Google's Japanese line-break segmenter. Use for wrapping burned-in
+#   JP captions at natural phrase boundaries instead of hand-rolled 、。！？
+#   character search (see tools/jp_wrap.py).
+# - auto-editor: VAD-based silence/jump-cut detection, more robust than
+#   manually tuning ffmpeg silencedetect thresholds.
+editing = [
+    "budoux>=0.6.0",
+    "auto-editor>=26.0.0",
 ]
 # Self-hosted cloud GPU fallback via Modal (see docs/modal-setup.md)
 modal = [
