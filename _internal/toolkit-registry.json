@@ -278,6 +278,32 @@
       "created": "2025-12-08",
       "updated": "2025-12-08"
     },
+    "jumpcut": {
+      "path": "tools/jumpcut.py",
+      "description": "Detect or remove silence/dead-air using auto-editor's VAD-based silence detection (Silero VAD) — more robust than hand-tuning ffmpeg silencedetect's dB threshold",
+      "usage": "uv run tools/jumpcut.py --input raw.mp4 --output cut.mp4",
+      "status": "beta",
+      "requires": "uv sync --extra editing (installs auto-editor; downloads its own compiled binary from github.com/WyattBlue/auto-editor on first run)",
+      "presets": [
+        "podcast",
+        "screencast",
+        "interview",
+        "noisy"
+      ],
+      "notes": "Detect-only mode (omit --output) prints a timestamped edit-decision list without touching the source file; --json for machine parsing. --edit-method overrides the audio VAD entirely (e.g. 'motion:threshold=2%' for silent b-roll).",
+      "created": "2026-09-10",
+      "updated": "2026-09-10"
+    },
+    "jp_wrap": {
+      "path": "tools/jp_wrap.py",
+      "description": "Wrap Japanese caption text into lines at natural phrase (bunsetsu) boundaries using BudouX, instead of hand-rolled 、。！？ character search",
+      "usage": "uv run tools/jp_wrap.py \"長い日本語のテキスト\" --budget 14",
+      "status": "beta",
+      "requires": "uv sync --extra editing (installs budoux)",
+      "notes": "Also importable as a library: `from tools.jp_wrap import wrap_jp`. Used by build_captions_*.py scripts wrapping burned-in JP subtitles.",
+      "created": "2026-09-10",
+      "updated": "2026-09-10"
+    },
     "redub": {
       "path": "tools/redub.py",
       "description": "Redub video with different voice (extract audio, transcribe, TTS, replace)",
